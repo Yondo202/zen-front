@@ -7,7 +7,7 @@ import { Trigger } from "@radix-ui/react-popover";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex justify-between gap-2 main-x-p py-6 shadow-sm bg-white relative z-30">
