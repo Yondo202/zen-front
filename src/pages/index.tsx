@@ -2,6 +2,7 @@ import { MoveUpRight } from "lucide-react";
 import Services from "../components/sections/Services";
 import TrastedPartner from "../components/sections/TrastedPartner";
 import HowItWorks from "../components/sections/HowItWorks";
+import InitialCalculate from "./calculate/InitialCalculate";
 
 function Index() {
   return (
@@ -24,6 +25,8 @@ function Index() {
             Book A Quota <MoveUpRight size={17} strokeWidth={1.5} />
           </div>
         </div>
+
+        <InitialCalculate  />
       </div>
       <Services />
       <HowItWorks />

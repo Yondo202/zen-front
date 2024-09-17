@@ -26,12 +26,17 @@ const items = [
     title: "Delivery with Confidence",
     desc: `We'll contact you to schedule delivery when your car arrives. Inspect it, verify its condition, and settle any balance to complete.`,
   },
-];
+]
 
 const About = () => {
   return (
     <div>
-      <HeaderWithBg title="About" bg_image={"https://s3-alpha-sig.figma.com/img/eb86/af0d/84a7829bafe07c0d8262fe62912df81c?Expires=1726444800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=aDJqplnBiLsgI6Zs2pbnDlDr4IXng7IjWkFH~L9Sh76dnjzFBlFaGfQYHV8kRXj7x3F6a5-XILmlCmWnW1DH1hqLuaKcp2DkUpL8bxdAH~~2nVz~5XBVbPt8Q3q~kRom6o7~E2vymos4zL0axncjY-GuLN7AkYT7mgme1x15l1253djCQJ3kPS31ir~6CacXkGmFQ2ym87rG~kYfdApbccZ~cLNec25IaBI~-eLdAnPu6njospNsdbHxsD-LnDovm3aZT1wvVDsIGQx-UxA2GgqaUurdqbP3IV7c2MpmXsgtXk1MMeUd~SOP1E~10uTR6mQqQTaM6u35JRhEtJE0uQ__"} />
+      <HeaderWithBg
+        title="About"
+        bg_image={
+          "https://s3-alpha-sig.figma.com/img/eb86/af0d/84a7829bafe07c0d8262fe62912df81c?Expires=1726444800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=aDJqplnBiLsgI6Zs2pbnDlDr4IXng7IjWkFH~L9Sh76dnjzFBlFaGfQYHV8kRXj7x3F6a5-XILmlCmWnW1DH1hqLuaKcp2DkUpL8bxdAH~~2nVz~5XBVbPt8Q3q~kRom6o7~E2vymos4zL0axncjY-GuLN7AkYT7mgme1x15l1253djCQJ3kPS31ir~6CacXkGmFQ2ym87rG~kYfdApbccZ~cLNec25IaBI~-eLdAnPu6njospNsdbHxsD-LnDovm3aZT1wvVDsIGQx-UxA2GgqaUurdqbP3IV7c2MpmXsgtXk1MMeUd~SOP1E~10uTR6mQqQTaM6u35JRhEtJE0uQ__"
+        }
+      />
 
       <div className="main-x-p grid grid-cols-4 bg-primary text-primary-foreground py-20">
         {items?.map((item, index) => {

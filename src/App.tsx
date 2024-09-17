@@ -6,7 +6,7 @@ import About from "./pages/About";
 import HowToShip from "./pages/how_it_works/HowToShip";
 import HowCalculateCost from "./pages/how_it_works/HowCalculateCost";
 import ServicesHome from "./pages/services/ServicesHome";
-// import ServiceCheckout from "./pages/services/ServiceCheckout";
+import Checkout from "@/pages/calculate/Checkout";
 
 function App() {
   return (
@@ -18,9 +18,8 @@ function App() {
         <Route path="/howtoship" element={<HowToShip />} />
         <Route path="/howtocalculate" element={<HowCalculateCost />} />
         <Route path="/services" element={<ServicesHome />} />
-        {/* <Route path="/services-checkout" element={<ServiceCheckout />} /> */}
+        <Route path="/services-checkout/:enqid" element={<Checkout />} />
       </Routes>
-
       <Footer />
     </BrowserRouter>
   );
