@@ -1,11 +1,7 @@
 import CheckoutHome from "@/components/checkout/CheckoutHome";
 
 const Checkout = () => {
-  return (
-    <div>
-        <CheckoutHome />
-    </div>
-  );
+  return <CheckoutHome />;
 };
 
 export default Checkout;

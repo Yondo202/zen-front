@@ -33,11 +33,12 @@ type TInitial = "starter" | "sub_steps";
 
 const CheckoutHome = () => {
   const { enqid } = useParams();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
+    retry:false,
     queryKey: ["enquiry", enqid],
     queryFn: () =>
       request<any>({
-        mainUrl: `${import.meta.env.VITE_SERVER_URL}/enquiries/${enqid}/?[populate]=*`,
+        mainUrl: `${import.meta.env.VITE_SERVER_URL}/enquiries/${enqid}/?populate[0]=vehicleInfo.model&populate[1]=zipInfo.source&populate[2]=zipInfo.destination&populate[3]=dateInfo&populate[4]=cost`, // &populate[0]=zipInfo.destination
       }),
   });
 
@@ -58,7 +59,11 @@ const CheckoutHome = () => {
       return;
     }
   }, []);
-  // className="bg-secondary px-24 pb-12 pt-2 text-sm"
+
+  if(isError){
+    return <h1 className="text-center py-10 text-destructive">Something went wrong, Go back and Try again, Please</h1>
+  }
+
   return (
     <div className={cn("bg-secondary pb-16 pt-0 w-full text-sm grid grid-rows-[5.3rem_1fr] transition-all duration-150", mainStep === "sub_steps" ? ` gap-6 grid-rows-[5.3rem_1fr]` : `gap-0 grid-rows-[2.3rem_1fr]`)}>
       {mainStep === "sub_steps" ? <Stepper items={subSteps} />  : <div />}

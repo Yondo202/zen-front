@@ -44,12 +44,13 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
       let baseRate = 0.41977; // nemelteer olon zuilees hamaarna
       // if (finalData.transportType === 'Open') baseRate = openRate
       // if (finalData.transportType === 'Enclosed') baseRate = enclosedRate
-      const calculatedCost = calculateTransportCost(baseRate, resdata?.distances?.[0]?.[0]);
+      const { totalCost, mile } = calculateTransportCost(baseRate, resdata?.distances?.[0]?.[0]);
 
       finalMutate({
         ...finalData,
         cost: {
-          calculatedCost: calculatedCost,
+          mile: mile,
+          calculatedCost: totalCost,
           baseRate: baseRate,
         },
       });
@@ -144,10 +145,8 @@ function calculateTransportCost(baseRate: number, distance: number) {
   // Convert distance from meters to miles
   const metersToMiles = 0.000621371;
   const distanceInMiles = distance * metersToMiles;
-  console.log(distanceInMiles, "---distanceInMiles");
-
   // Calculate the total cost
   const totalCost = baseRate * distanceInMiles;
 
-  return totalCost;
+  return { totalCost:totalCost, mile:distanceInMiles };
 }

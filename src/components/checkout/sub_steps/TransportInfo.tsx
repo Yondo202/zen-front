@@ -6,6 +6,7 @@ import { request } from "@/lib/request";
 import { useEffect } from "react";
 import { TResSkull } from "../StarterSection";
 import { type THeadStepItem } from "../CheckoutHome";
+import { useParams } from "react-router-dom";
 
 type TCRepresent = "Individual" | "Business";
 // type TDeliveryAddressDetails = 'individual' | 'business'
@@ -17,7 +18,8 @@ type TTransportType = {
   phone_number: string;
   customer_represent: TCRepresent;
   // delivery_address_details: { id: number }[] | undefined;
-  pricing: { id: number }[] | undefined;
+  // pricing: { id: number }[] | undefined;
+  enquiry: { id: number }[] | undefined;
 };
 
 const initial: TTransportType = {
@@ -26,25 +28,19 @@ const initial: TTransportType = {
   email: "",
   phone_number: "",
   customer_represent: "Individual",
-  pricing: undefined,
+  enquiry: undefined,
   // delivery_address_details: undefined,
 };
 
 const validEmail = {
   pattern: {
-    value:
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
     message: "Check the email that you entered",
   },
 };
 
-const TransportInfo = ({
-  activeStep,
-  toNext,
-}: {
-  activeStep?: THeadStepItem;
-  toNext: () => void;
-}) => {
+const TransportInfo = ({ activeStep, toNext }: { activeStep?: THeadStepItem; toNext: () => void }) => {
+  const { enqid } = useParams();
   const { control, handleSubmit, setValue, reset } = useForm<TTransportType>({
     defaultValues: initial,
   });
@@ -54,9 +50,9 @@ const TransportInfo = ({
   const savedId = JSON.parse(localStorage.getItem(localeKey) ?? "{}")?.id;
 
   useEffect(() => {
-    setValue("pricing", [
+    setValue("enquiry", [
       {
-        id: JSON.parse(localStorage.getItem("starter") ?? "{}")?.id,
+        id: Number(enqid),
       },
     ]);
   }, []);
@@ -170,11 +166,7 @@ const TransportInfo = ({
               </Label>
               <Input {...field} placeholder="Enter your email" />
 
-              {fieldState.error ? (
-                <div className="text-end text-destructive">
-                  {fieldState.error.message}
-                </div>
-              ) : null}
+              {fieldState.error ? <div className="text-end text-destructive">{fieldState.error.message}</div> : null}
             </div>
           );
         }}
