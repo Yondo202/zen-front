@@ -17,7 +17,7 @@ const Stepper = ({
 }: // activeStep,
 StepperProps) => {
   return (
-    <div className={cn("bg-card animate-zero-to-height overflow-hidden flex items-center", isInitial ? `` : `px-40`, className)}>
+    <div className={cn("bg-card animate-zero-to-height overflow-hidden flex items-center", isInitial ? `` : `px-40`, className, 'max-sm:px-3')}>
       <div className="container">
         <div className="flex items-center justify-between relative">
           <div className={cn("h-0 border-b border-dashed border-muted-foreground w-full absolute left-0 top-1/3 z-[10]", isInitial ? `z-0` : ``)} />

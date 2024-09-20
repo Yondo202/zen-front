@@ -12,13 +12,13 @@ const Header = () => {
   return (
     <div className="flex justify-between gap-2 main-x-p py-6 shadow-sm bg-white relative z-30">
       <div
-        className="text-6xl font-semibold cursor-pointer"
+        className="text-6xl font-semibold cursor-pointer flex items-center max-sm:text-base"
         onClick={() => navigate("/")}
       >
         Zen Logistics
       </div>
-      <div className="flex items-center gap-10">
-        <div className="text-base font-medium cursor-pointer hover:text-muted-foreground">
+      <div className="flex items-center gap-10 max-sm:gap-3 max-sm:pr-3">
+        <div className="text-base font-medium cursor-pointer hover:text-muted-foreground  max-sm:text-xs">
           <Popover open={open} onOpenChange={(e) => setOpen(e)}>
             <Trigger asChild>
               <div className="flex items-center gap-1.5"> How It Works <ChevronDown size={18} /></div>
@@ -41,20 +41,20 @@ const Header = () => {
         </div>
 
         <div
-          className="text-base font-medium cursor-pointer hover:text-muted-foreground"
+          className="text-base font-medium cursor-pointer hover:text-muted-foreground  max-sm:text-xs"
           onClick={() => navigate("/about")}
         >
           About
         </div>
         <div
           onClick={() => navigate("/services")}
-          className="text-base font-medium flex items-center gap-1.5 cursor-pointer hover:text-muted-foreground"
+          className="text-base font-medium flex items-center gap-1.5 cursor-pointer hover:text-muted-foreground  max-sm:text-xs"
         >
           Services
           {/* <ChevronDown size={18} /> */}
         </div>
 
-        <div className="text-base pl-12 font-medium cursor-pointer flex items-center gap-3">
+        <div className="text-base pl-12 font-medium cursor-pointer flex items-center gap-3 max-sm:hidden">
           <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#101E8A] border-2 border-[#CCDBFD]">
             <Phone size={13} color="#FFF" />
           </div>{" "}

@@ -6,7 +6,7 @@ const items = ["How It Works", "About Zen Logistics", "Services", "Cost calculat
 const Footer = () => {
   return (
     <>
-      <div className="bg-primary main-x-p py-14 grid grid-cols-[42%_1fr] gap-5 text-primary-foreground h-[82dvh]">
+      <div className="bg-primary main-x-p py-14 grid grid-cols-[42%_1fr] gap-5 text-primary-foreground h-[82dvh] max-sm:grid-cols-1 max-sm:h-auto">
         {/* <img className="w-full" alt="img" src= /> */}
         <div
           className="bg-no-repeat bg-cover bg-top mr-36"
@@ -42,15 +42,15 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-[#EDF2FA] py-16 flex flex-col items-center justify-center gap-10">
-        <div className="text-4xl font-semibold">What are you waiting for?</div>
-        <div className="text-6xl font-semibold underline flex items-center gap-4 ">
-          <span className="grad-text">Book A Quota</span> <ArrowUpRight size={60} />
+      <div className="bg-[#EDF2FA] py-16 flex flex-col items-center justify-center gap-10 max-sm:py-8 max-sm:gap-6">
+        <div className="text-4xl font-semibold max-sm:text-xl">What are you waiting for?</div>
+        <div className="text-6xl font-semibold underline flex items-center gap-4 max-sm:text-2xl">
+          <span className="grad-text">Book A Quota</span> <ArrowUpRight size={60} className="h-8 w-8" />
         </div>
       </div>
 
       <div className="bg-[#03030D] bg-[url('/footer.png')] bg-right-top bg-cover text-sm text-primary-foreground">
-        <div className="main-x-p py-9 grid grid-cols-4 gap-3">
+        <div className="main-x-p py-9 grid grid-cols-4 gap-3 max-sm:grid-cols-1">
           <div className="text-3xl font-semibold">Zen Logistics</div>
           <div className="space-y-2">
             <div className="font-medium mb-4">Quick Links</div>

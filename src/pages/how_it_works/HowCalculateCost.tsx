@@ -72,7 +72,7 @@ const HowCalculateCost = () => {
       />
 
       <div>
-        <div className="text-5xl font-semibold py-10 pt-20 text-center">
+        <div className="text-5xl font-semibold py-10 pt-20 text-center max-sm:text-xl">
           Factors Affecting Car Shipping Costs
         </div>
       </div>

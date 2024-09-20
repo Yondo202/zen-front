@@ -47,15 +47,15 @@ const HowItWorks = () => {
       title="Ship Your Car Across Country with Ease!"
       sub_desc="Here's How it Works"
     >
-      <div className="main-x-p grid grid-cols-2 gap-x-32 gap-y-4">
+      <div className="main-x-p grid grid-cols-2 gap-x-32 gap-y-4 max-sm:grid-cols-1">
         {items?.map((item, index) => {
           return (
             <div
               key={index}
-              className={cn("space-y-6", index % 2 === 0 ? `` : `pt-20`)}
+              className={cn("space-y-6", index % 2 === 0 ? `` : `pt-20  max-sm:pt-2`)}
             >
               <CountCircle bg={item.bg} count={index + 1} />
-              <div className="text-3xl font-semibold">{item.title}</div>
+              <div className="text-3xl font-semibold max-sm:text-xl">{item.title}</div>
               <div className="leading-8">{item.desc}</div>
             </div>
           );

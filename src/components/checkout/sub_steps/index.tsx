@@ -51,6 +51,15 @@ const index = ({ starterTrigger, setSubSteps, items }: TSubProps) => {
 
   return (
     <div className="relative animate-slide-right-to-left">
+       <div
+        onClick={() =>
+          activeStep?.title === "Transport" ? starterTrigger() : prevAction()
+        }
+        className="absolute top-0 -left-12 w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer hover:bg-secondary max-sm:relative max-sm:left-0 mb-4"
+      >
+        <ArrowLeft width={18} />
+      </div>
+
       <div className="space-y-5">
         <div>
           <div className="font-medium text-lg">
@@ -94,14 +103,7 @@ const index = ({ starterTrigger, setSubSteps, items }: TSubProps) => {
         )}
       </div>
 
-      <div
-        onClick={() =>
-          activeStep?.title === "Transport" ? starterTrigger() : prevAction()
-        }
-        className="absolute top-0 -left-12 w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer hover:bg-secondary"
-      >
-        <ArrowLeft width={18} />
-      </div>
+     
     </div>
   );
 };

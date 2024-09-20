@@ -38,15 +38,15 @@ const ServicesHome = () => {
         }
       />
       <div className="main-x-p my-20">
-        <div className="text-5xl font-semibold py-10">
+        <div className="text-5xl font-semibold py-10 max-sm:text-xl">
           Factors Affecting Car Shipping Costs
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 max-sm:grid-cols-1">
           {cardsItem?.map((item, index) => {
             return (
               <div key={index} className="p-4 border border-muted-foreground/30 rounded-md space-y-3">
                 {item.icon}
-                <div className="text-2xl pt-2 font-semibold">{item.title}</div>
+                <div className="text-2xl pt-2 font-semibold max-sm:text-base">{item.title}</div>
                 <div className="text-foreground/60 leading-8">{item.desc}</div>
               </div>
             );

@@ -67,7 +67,7 @@ const CheckoutHome = () => {
   return (
     <div className={cn("bg-secondary pb-16 pt-0 w-full text-sm grid grid-rows-[5.3rem_1fr] transition-all duration-150", mainStep === "sub_steps" ? ` gap-6 grid-rows-[5.3rem_1fr]` : `gap-0 grid-rows-[2.3rem_1fr]`)}>
       {mainStep === "sub_steps" ? <Stepper items={subSteps} />  : <div />}
-      <div className="main-x-p px-40 h-max grid grid-cols-2 gap-10 pb-1">
+      <div className="main-x-p px-40 h-max grid grid-cols-2 gap-10 pb-1 max-sm:grid-cols-1 max-sm:px-3">
         {isLoading ? (
           <>
             <Skeleton className="w-full h-[80dvh] rounded-md" />
@@ -76,7 +76,7 @@ const CheckoutHome = () => {
         ) : (
           <>
             {mainStep === "sub_steps" ? (
-              <div className="pr-32">
+              <div className="pr-32 max-sm:pr-0">
                 <SubStepSection items={subSteps} setSubSteps={setSubSteps} starterTrigger={() => starterTrigger("starter")} />
               </div>
             ) : (

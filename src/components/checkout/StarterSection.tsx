@@ -34,7 +34,7 @@ const StarterSection = ({ starterTrigger, data }: { starterTrigger: () => void; 
         // className={cn("space-y-3", isError ? `border border-destructive/70` : ``)}
         className={"space-y-3 pt-2 pb-8"}
       >
-        <Label className="relative flex items-center gap-6 p-4">
+        <Label className="relative flex items-center gap-6 p-4 max-sm:flex-col max-sm:items-start">
           <RadioGroupItem className="peer" value={data?.data.id} id={data?.data?.id} />
           <div className="absolute top-0 left-0 w-full h-full border border-muted-foreground/20 peer-aria-checked:border-muted-foreground" />
           <div className="pr-6">

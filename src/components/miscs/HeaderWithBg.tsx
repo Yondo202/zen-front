@@ -3,15 +3,15 @@ import { Square } from "lucide-react";
 const HeaderWithBg = ({ title = "", bg_image = "", sub_title = "" }) => {
   return (
     <div
-      className="main-x-p py-24 px-44 bg-center bg-cover bg-no-repeat relative"
+      className="main-x-p py-24 px-44 bg-center bg-cover bg-no-repeat relative max-sm:px-8 max-sm:py-10"
       style={{
         backgroundImage: `url(${bg_image})`,
       }}
     >
       <div className="relative z-20">
-        <div className="text-3xl font-semibold mb-4">{title}</div>
+        <div className="text-3xl font-semibold mb-4 max-sm:text-base">{title}</div>
 
-        <div className="text-xl font-semibold flex items-center gap-3">
+        <div className="text-xl font-semibold flex items-center gap-3 max-sm:text-base">
           <span>Home</span>
           <Square size={8} fill="#000" />
           <span>{sub_title?.length > 0 ? sub_title : title}</span>

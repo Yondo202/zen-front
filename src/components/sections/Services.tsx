@@ -40,20 +40,20 @@ const Services = () => {
     <>
       <div className="text-center flex flex-col items-center py-14">
         <InfoTag title="Our Services" />
-        <div className="text-5xl font-semibold mb-6">
+        <div className="text-5xl font-semibold mb-6 max-sm:text-2xl">
           Streamlined vehicle shipping solutions
         </div>
-        <div className="w-[55%] font-lg leading-8">
+        <div className="w-[55%] font-lg leading-8 max-sm:w-full">
           We offer efficient and reliable vehicle transport services tailored to
           meet your needs. Experience hassle-free shipping with Zen Logistics.
         </div>
       </div>
 
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 max-sm:grid-cols-1">
         {streamlinedShipping?.map((item, index) => {
           return (
             <div style={{ backgroundImage: `url(${item.url})` }} className={`h-[570px] text-center flex flex-col justify-between bg-cover bg-center bg-no-repeat p-8 text-[#FFF] relative`} key={index}>
-              <span className="text-3xl font-semibold underline flex items-center justify-center gap-2 w-full z-20">{item.title} <ArrowUpRight size={30} /></span>
+              <span className="text-3xl font-semibold underline flex items-center justify-center gap-2 w-full z-20 max-sm:text-xl">{item.title} <ArrowUpRight size={30} /></span>
               <span className='font-semibold z-20'>{item.desc}</span>
               <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />
             </div>

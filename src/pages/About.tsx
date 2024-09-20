@@ -38,20 +38,20 @@ const About = () => {
         }
       />
 
-      <div className="main-x-p grid grid-cols-4 bg-primary text-primary-foreground py-20">
+      <div className="main-x-p grid grid-cols-4 bg-primary text-primary-foreground py-20 max-sm:grid-cols-1">
         {items?.map((item, index) => {
           return (
             <div
               key={index}
-              className="space-y-4 border-r px-4 last:border-none pb-5"
+              className="space-y-4 border-r px-4 last:border-none pb-5 max-sm:border-none max-sm:px-0"
             >
               <CountCircle
                 bg={item.bg}
                 count={index + 1}
-                className="w-12 h-12 text-base"
+                className="w-12 h-12 text-base max-sm:w-10 max-sm:h-10 max-sm:text-sm"
               />
-              <div className="text-2xl font-medium">{item.title}</div>
-              <div className="leading-8">{item.desc}</div>
+              <div className="text-2xl font-medium max-sm:text-xl">{item.title}</div>
+              <div className="leading-8 max-sm:text-xs">{item.desc}</div>
             </div>
           );
         })}

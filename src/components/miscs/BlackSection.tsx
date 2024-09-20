@@ -13,7 +13,7 @@ const BlackSection = (props: TBlackSection) => {
     <div className="bg-primary text-primary-foreground pb-10">
       <div className="text-center flex flex-col items-center py-14 pb-6">
         <InfoTag title={props.tag_title} />
-        <div className="text-5xl font-semibold mb-6">
+        <div className="text-5xl font-semibold mb-6 max-sm:text-xl">
           {props.title}
           {props.sub_desc && (
             <div className="mt-3 text-muted-foreground">{props.sub_desc}</div>
