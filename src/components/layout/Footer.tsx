@@ -1,13 +1,7 @@
 import { ArrowUpRight, Quote, Star } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
-const items = [
-  "How It Works",
-  "About Zen Logistics",
-  "Services",
-  "Cost calculator",
-  "Terms and Conditions",
-  "Privacy policy",
-];
+const items = ["How It Works", "About Zen Logistics", "Services", "Cost calculator", "Terms and Conditions", "Privacy policy"];
 
 const Footer = () => {
   return (
@@ -42,15 +36,8 @@ const Footer = () => {
           </div>
           <div className="text-xl font-medium mb-3">‟Highly Effective Transport Service”</div>
           <div className="text-primary-foreground/65 leading-8 pr-10">
-            I recently used ZEN for transporting my car across the country, and
-            I couldn't be happier with the service! From start to finish, the
-            entire process was seamless and stress-free. The team was incredibly
-            professional and handled every detail with care. I appreciated the
-            regular updates and the ability to track my car's journey in
-            real-time. My vehicle arrived on time and in perfect condition. I
-            highly recommend ZEN to anyone looking for a reliable and efficient
-            car transport service. They've truly set the standard for excellence
-            in this industry!
+            I recently used ZEN for transporting my car across the country, and I couldn't be happier with the service! From start to finish, the entire process was seamless and stress-free. The team was incredibly professional and handled every detail with care. I appreciated the regular updates
+            and the ability to track my car's journey in real-time. My vehicle arrived on time and in perfect condition. I highly recommend ZEN to anyone looking for a reliable and efficient car transport service. They've truly set the standard for excellence in this industry!
           </div>
         </div>
       </div>
@@ -58,8 +45,7 @@ const Footer = () => {
       <div className="bg-[#EDF2FA] py-16 flex flex-col items-center justify-center gap-10">
         <div className="text-4xl font-semibold">What are you waiting for?</div>
         <div className="text-6xl font-semibold underline flex items-center gap-4 ">
-          <span className="grad-text">Book A Quota</span>{" "}
-          <ArrowUpRight size={60} />
+          <span className="grad-text">Book A Quota</span> <ArrowUpRight size={60} />
         </div>
       </div>
 
@@ -70,10 +56,7 @@ const Footer = () => {
             <div className="font-medium mb-4">Quick Links</div>
             {items?.map((item, index) => {
               return (
-                <div
-                  className="text-primary-foreground/70 cursor-pointer hover:text-primary-foreground"
-                  key={index}
-                >
+                <div className="text-primary-foreground/70 cursor-pointer hover:text-primary-foreground" key={index}>
                   {item}
                 </div>
               );
@@ -88,19 +71,22 @@ const Footer = () => {
             </div>
             <div className="text-primary-foreground/70 cursor-pointer hover:text-primary-foreground">
               {" "}
-              <span className="text-primary-foreground">Number: </span>{" "}
-              +833-644-0386
+              <span className="text-primary-foreground">Number: </span> +833-644-0386
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="font-medium mb-4">Social</div>
+            <div className="flex gap-4">
+              <a href="https://www.facebook.com/montway" target="_blank" className="bg-slate-100/20 w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"><Facebook fill="#FFF" strokeWidth={0} /></a>
+              <a  href="https://www.instagram.com/montwayautotransport" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Instagram  /></a>
+              <a  href="https://www.linkedin.com/company/montway-auto-transport" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Linkedin  fill="#FFF" strokeWidth={0} /></a>
+            </div>
           </div>
         </div>
 
         <div className="flex justify-center py-5 border-t border-px border-muted-foreground/40">
-          Copyright © 2024 <span className="text-[#ABC4FF]">Zen Logistics</span>
-          . All rights reserved
+          Copyright © 2024 <span className="text-[#ABC4FF]">Zen Logistics</span>. All rights reserved
         </div>
       </div>
     </>

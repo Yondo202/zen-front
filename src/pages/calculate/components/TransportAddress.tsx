@@ -26,7 +26,7 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
     fromRequire: false,
     toRequire: false,
     fromToSameValue: false,
-    // transportType: false,
+    sameFromTo: false,
   });
 
   const [transportValue, setTransportValue] = useState<{
@@ -65,10 +65,10 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
 
   useEffect(() => {
     if (transportValue.from) {
-      setErros((prev) => ({ ...prev, fromRequire: false }));
+      setErros((prev) => ({ ...prev, fromRequire: false, sameFromTo: false }));
     }
     if (transportValue.to) {
-      setErros((prev) => ({ ...prev, toRequire: false }));
+      setErros((prev) => ({ ...prev, toRequire: false, sameFromTo: false }));
     }
   }, [transportValue]);
 
@@ -79,6 +79,10 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
     }
     if (!transportValue.to) {
       setErros((prev) => ({ ...prev, toRequire: true }));
+      return;
+    }
+    if (transportValue.to?.US_Zip_Code === transportValue.from?.US_Zip_Code) {
+      setErros((prev) => ({ ...prev, sameFromTo:true  }));
       return;
     }
 
@@ -110,6 +114,8 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
       <div className="bg-white border py-3 rounded-md mb-4 space-y-4">
         <FromToAddressInput transportValue={transportValue.from} transportType="from" setTransportValue={setTransportValue} require={errors.fromRequire} />
         <FromToAddressInput transportValue={transportValue.to} transportType="to" setTransportValue={setTransportValue} require={errors.toRequire} />
+
+        {errors.sameFromTo && <span className="text-destructive">The zip codes must differ from each other</span>}
       </div>
 
       <div className="flex items-center gap-3 mb-5">

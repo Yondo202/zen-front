@@ -3,7 +3,7 @@ import { format } from "date-fns";
 const DetailCard = ({ data }: { data?: any }) => {
   const infoData = data?.data?.attributes;
 
-  console.log(data?.data?.attributes?.cost?.mile, "-------->data?.data?.attributes?.cost?.mile")
+  // console.log(data?.data?.attributes?.cost?.mile, "-------->data?.data?.attributes?.cost?.mile")
 
   // console.log(data, "-------->data");
   return (
