@@ -29,13 +29,7 @@ const initialDetail: TAddressDetail = {
   core_type: "",
 };
 
-const AdressDetail = ({
-  activeStep,
-  toNext,
-}: {
-  activeStep?: THeadStepItem;
-  toNext: () => void;
-}) => {
+const AdressDetail = ({ activeStep, toNext }: { activeStep?: THeadStepItem; toNext: () => void }) => {
   const { control, handleSubmit, setValue, reset } = useForm<TAddressDetail>({
     defaultValues: initialDetail,
   });
@@ -70,17 +64,31 @@ const AdressDetail = ({
     }
   }, [isFetchedAfterMount]);
 
+  const { mutate: paymentMutate, isPending: isPendingMutate } = useMutation({
+    mutationFn: () =>
+      request({
+        mainUrl: `${import.meta.env.VITE_SERVER_URL}/orders`,
+        filterBody: { data: { enqid: JSON.parse(localStorage.getItem("starter") ?? "{}")?.id } },
+        method: "post",
+      }),
+    onSuccess: (resdata: any) => {
+      window.open(resdata?.payment_url, "_self");
+    },
+  });
+
   const { mutate, isPending } = useMutation({
     mutationFn: (body: TAddressDetail) =>
       request<{ data: TResSkull<TAddressDetail> }>({
-        mainUrl: `${import.meta.env.VITE_SERVER_URL}/delivery-address-details/${
-          !!data ? savedId : ""
-        }`,
+        mainUrl: `${import.meta.env.VITE_SERVER_URL}/delivery-address-details/${!!data ? savedId : ""}`,
         filterBody: { data: body },
         method: !!data ? "put" : "post",
       }),
     onSuccess: (resdata) => {
       localStorage.setItem(localeKey, JSON.stringify(resdata.data));
+      if (localeKey === "delivery") {
+        paymentMutate();
+        return;
+      }
       toNext();
     },
   });
@@ -98,9 +106,7 @@ const AdressDetail = ({
         render={({ field, fieldState }) => {
           return (
             <div className="space-y-1">
-              <Label isError={!!fieldState.error}>
-                {activeStep?.title} address
-              </Label>
+              <Label isError={!!fieldState.error}>{activeStep?.title} address</Label>
               <Input {...field} placeholder="Enter your Street address" />
             </div>
           );
@@ -143,13 +149,8 @@ const AdressDetail = ({
         render={({ field, fieldState }) => {
           return (
             <div className="space-y-1">
-              <Label isError={!!fieldState.error}>
-                Pickup contact's full name
-              </Label>
-              <Input
-                {...field}
-                placeholder="Enter pickup contact's full name"
-              />
+              <Label isError={!!fieldState.error}>Pickup contact's full name</Label>
+              <Input {...field} placeholder="Enter pickup contact's full name" />
             </div>
           );
         }}
@@ -162,20 +163,15 @@ const AdressDetail = ({
         render={({ field, fieldState }) => {
           return (
             <div className="space-y-1 pb-4">
-              <Label isError={!!fieldState.error}>
-                Phone number
-              </Label>
-              <Input
-                {...field}
-                placeholder="Enter pickup contact's puckup number"
-              />
+              <Label isError={!!fieldState.error}>Phone number</Label>
+              <Input {...field} placeholder="Enter pickup contact's puckup number" />
             </div>
           );
         }}
       />
 
-      <Button isLoading={isPending} size="lg" className="gap-3 w-full h-12">
-        Pickup Info
+      <Button isLoading={isPending || isPendingMutate} size="lg" className="gap-3 w-full h-12">
+        {localeKey === "pickup" ? `Delivery Info` : `Book Shipment`}
         <MoveRight strokeWidth={1.5} />
       </Button>
     </form>

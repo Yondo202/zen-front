@@ -1,10 +1,11 @@
-import { Input, Label, Button } from "@/components/ui";
-import { MoveRight } from "lucide-react";
+// import { Input, Label, Button } from "@/components/ui";
+// import { MoveRight } from "lucide-react";
 
 const BookShipment = () => {
+  
   return (
     <div>
-      <div className="flex gap-4 mb-4">
+      {/* <div className="flex gap-4 mb-4">
         <div className="text-xs font-semibold border border-muted-foreground py-4 w-36 text-center cursor-pointer bg-black text-primary-foreground">
           Credit card
         </div>
@@ -46,7 +47,7 @@ const BookShipment = () => {
       <Button size="lg" className="gap-3 w-full h-12 mt-6">
         Book Shipment
         <MoveRight strokeWidth={1.5} />
-      </Button>
+      </Button> */}
     </div>
   );
 };

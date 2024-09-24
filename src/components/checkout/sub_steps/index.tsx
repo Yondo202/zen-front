@@ -2,7 +2,7 @@ import { type THeadStepItem } from "../CheckoutHome";
 import { ArrowLeft } from "lucide-react";
 import TransportInfo from "./TransportInfo";
 import AdressDetail from "./AdressDetail";
-import BookShipment from "./BookShipment";
+// import BookShipment from "./BookShipment";
 
 type TSubProps = {
   items: THeadStepItem[];
@@ -95,15 +95,16 @@ const index = ({ starterTrigger, setSubSteps, items }: TSubProps) => {
             activeStep={activeStep}
           />
         )}
-        {activeStep?.title === "Book shipment" && (
+
+        {/* {activeStep?.title === "Book shipment" && (
           <BookShipment
             // toNext={() => nextAction(activeStep)}
             // activeStep={activeStep}
           />
-        )}
-      </div>
+        )} */}
+       
 
-     
+      </div>
     </div>
   );
 };

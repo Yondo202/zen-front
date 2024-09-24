@@ -12,6 +12,8 @@ type TForm = {
   phoneNumber: string;
   date: string;
 };
+// success_url: 'http://localhost:5173/services-checkout/11?success=true',
+// cancel_url: 'http://localhost:5173/services-checkout/11?canceled=true',
 
 const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps) => {
   const navigate = useNavigate()
@@ -50,11 +52,10 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
         ...finalData,
         cost: {
           mile: mile,
-          calculatedCost: totalCost,
+          calculatedCost: Math.ceil(totalCost),
           baseRate: baseRate,
         },
-      });
-      // console.log();
+      })
     },
   });
 
