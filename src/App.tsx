@@ -19,6 +19,8 @@ function App() {
         <Route path="/howtocalculate" element={<HowCalculateCost />} />
         <Route path="/services" element={<ServicesHome />} />
         <Route path="/services-checkout/:enqid" element={<Checkout />} />
+
+        {/* <Route path="/thank-you/:orderid" element={<Checkout />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

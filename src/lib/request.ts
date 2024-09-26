@@ -1,7 +1,7 @@
 // import { queryClient } from "@/main";
 import axios from "axios";
 // import Notification from '@/utils/hooks/Notification';
-// import { queryClient } from '@/main'
+import { queryClient } from '@/main'
 import { toast } from "sonner";
 
 // type TCustomHeader ={
@@ -17,6 +17,7 @@ export type TRequest<T> = {
   filterBody?: unknown;
   queryParams?: unknown;
   headers?: any;
+  offAlert?:boolean
 };
 
 // type ResponseType<T> = {
@@ -38,6 +39,7 @@ export const request = async <T>({
   queryParams,
   filterBody,
   headers,
+  offAlert
 }: TRequest<T>) => {
   const header = headers ? { headers: { ...(headers ?? {}) } } : {};
   const reqAsset = { params: queryParams, ...header }; // headers: { 'Access-Control-Allow-Origin' : '*', },
@@ -53,7 +55,9 @@ export const request = async <T>({
     });
 
     if (method !== "get") {
-      toast.success("Request success");
+      if(!offAlert){
+        toast.success("Request success");
+      }
     }
     // return response.data.data;
     return response.data;
@@ -64,12 +68,12 @@ export const request = async <T>({
   }
 };
 
-// type TRefetch = {
-//    queryKey: string
-//    queryId?: string
-// }
+type TRefetch = {
+   queryKey: string
+   queryId?: string
+}
 
-// export const UseReFetch = ({ queryKey, queryId }: TRefetch) => {
-//    queryClient.refetchQueries({ queryKey: [queryKey, queryId ?? undefined] })
-//    // messageAlert('Хүсэлт амжилттай')
-// }
+export const UseReFetch = ({ queryKey, queryId }: TRefetch) => {
+   queryClient.refetchQueries({ queryKey: [queryKey, queryId ?? undefined] })
+   // messageAlert('Хүсэлт амжилттай')
+}

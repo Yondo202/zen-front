@@ -8,7 +8,7 @@ const cardsItem = [
   {
     title: "Make the move easier",
     icon:<PackageCheck size={44} strokeWidth={1} />,
-    desc: `Moving is already a hassle. So, save yourself some trouble and let Montway handle the car shipping portion for you. We offer open or enclosed door-to-door auto transport with insurance for your car so you'll have peace of mind.`,
+    desc: `Moving is already a hassle. So, save yourself some trouble and let Zen handle the car shipping portion for you. We offer open or enclosed door-to-door auto transport with insurance for your car so you'll have peace of mind.`,
   },
   {
     title: "No extra miles on your vehicle",

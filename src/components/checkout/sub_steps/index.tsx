@@ -8,9 +8,10 @@ type TSubProps = {
   items: THeadStepItem[];
   starterTrigger: () => void;
   setSubSteps: React.Dispatch<React.SetStateAction<THeadStepItem[]>>;
+  enqdata:any
 };
 
-const index = ({ starterTrigger, setSubSteps, items }: TSubProps) => {
+const index = ({ starterTrigger, setSubSteps, items, enqdata }: TSubProps) => {
   const activeStep = items.find((item) => item.status === "process");
   const findIndex = items.findIndex((item) => item.title === activeStep?.title);
 
@@ -27,7 +28,7 @@ const index = ({ starterTrigger, setSubSteps, items }: TSubProps) => {
         }
         return item;
       });
-      localStorage.setItem("step-assets", JSON.stringify(finalUpdate));
+      // localStorage.setItem("step-assets", JSON.stringify(finalUpdate));
       return finalUpdate;
     });
   };
@@ -77,33 +78,30 @@ const index = ({ starterTrigger, setSubSteps, items }: TSubProps) => {
 
         {activeStep?.title === "Transport" && (
           <TransportInfo
+            transportId={enqdata?.data?.attributes?.checkout?.data?.id}
             toNext={() => nextAction(activeStep)}
-            activeStep={activeStep}
+            // activeStep={activeStep}
           />
         )}
 
         {activeStep?.title === "Pickup" && (
           <AdressDetail
+            addressType="Pickup"
+            addressId={enqdata?.data?.attributes?.pickup_address_detail?.data?.id}
             toNext={() => nextAction(activeStep)}
-            activeStep={activeStep}
+            // activeStep={activeStep}
           />
         )}
 
         {activeStep?.title === "Delivery" && (
           <AdressDetail
+            addressType="Delivery"
+            addressId={enqdata?.data?.attributes?.delivery_address_detail?.data?.id}
+            orderId={enqdata?.data?.attributes?.order?.data?.id}
             toNext={() => nextAction(activeStep)}
-            activeStep={activeStep}
-          />
-        )}
-
-        {/* {activeStep?.title === "Book shipment" && (
-          <BookShipment
-            // toNext={() => nextAction(activeStep)}
             // activeStep={activeStep}
           />
-        )} */}
-       
-
+        )}
       </div>
     </div>
   );

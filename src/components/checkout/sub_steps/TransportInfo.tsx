@@ -2,10 +2,11 @@ import { Label, Button, Input, RadioGroup, RadioGroupItem } from "@/components/u
 import { MoveRight } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { request } from "@/lib/request";
+import { request, UseReFetch } from "@/lib/request";
 import { useEffect } from "react";
 import { TResSkull } from "../StarterSection";
-import { type THeadStepItem } from "../CheckoutHome";
+import { Skeleton } from "@/components/ui/skeleton";
+// import { type THeadStepItem } from "../CheckoutHome";
 import { useParams } from "react-router-dom";
 
 type TCRepresent = "Individual" | "Business";
@@ -39,32 +40,37 @@ const validEmail = {
   },
 };
 
-const TransportInfo = ({ activeStep, toNext }: { activeStep?: THeadStepItem; toNext: () => void }) => {
+export const updateEnquiry = ({ toNext, enqid, updateKey }: { toNext: () => void; enqid?: string; updateKey: string }) => {
+  return useMutation({
+    mutationFn: (body: any) =>
+      request({
+        mainUrl: `${import.meta.env.VITE_SERVER_URL}/enquiries/${enqid}`,
+        filterBody: { data: { [updateKey]: body.id } },
+        method: "put",
+        offAlert:true
+      }),
+    onSuccess: () => {
+      UseReFetch({ queryKey: "enquiry", queryId: enqid });
+      toNext();
+    },
+  });
+};
+
+const TransportInfo = ({ toNext, transportId }: { toNext: () => void; transportId?: string }) => {
+  //activeStep?: THeadStepItem;
   const { enqid } = useParams();
-  const { control, handleSubmit, setValue, reset } = useForm<TTransportType>({
+  const { control, handleSubmit, reset } = useForm<TTransportType>({
     defaultValues: initial,
   });
 
-  const localeKey = activeStep?.localKey ?? "";
-
-  const savedId = JSON.parse(localStorage.getItem(localeKey) ?? "{}")?.id;
-
-  useEffect(() => {
-    setValue("enquiry", [
-      {
-        id: Number(enqid),
-      },
-    ]);
-  }, []);
-
-  const { data, isFetchedAfterMount } = useQuery<{
+  const { data, isFetchedAfterMount, isLoading } = useQuery<{
     data: TResSkull<TTransportType>;
   }>({
     queryKey: ["checkout-transport"],
-    enabled: !!savedId,
+    enabled: !!transportId,
     queryFn: () =>
       request({
-        mainUrl: `${import.meta.env.VITE_SERVER_URL}/checkouts/${savedId}`,
+        mainUrl: `${import.meta.env.VITE_SERVER_URL}/checkouts/${transportId}`,
         method: "get",
       }),
   });
@@ -75,16 +81,20 @@ const TransportInfo = ({ activeStep, toNext }: { activeStep?: THeadStepItem; toN
     }
   }, [isFetchedAfterMount]);
 
+  const { mutate: mutateEnq, isPending: pendingEnq } = updateEnquiry({ toNext, enqid, updateKey: "checkout" });
+
   const { mutate, isPending } = useMutation({
     mutationFn: (body: TTransportType) =>
       request<{ data: TResSkull<TTransportType> }>({
-        mainUrl: `${import.meta.env.VITE_SERVER_URL}/checkouts/${!!data ? savedId : ""}`,
+        mainUrl: `${import.meta.env.VITE_SERVER_URL}/checkouts/${!!data ? transportId : ""}`,
         filterBody: { data: body },
         method: !!data ? "put" : "post",
+        offAlert:true
       }),
     onSuccess: (resdata) => {
-      localStorage.setItem(localeKey, JSON.stringify(resdata.data));
-      toNext();
+      // localStorage.setItem(localeKey, JSON.stringify(resdata.data));
+      mutateEnq(resdata.data);
+      // toNext();
     },
   });
 
@@ -92,6 +102,10 @@ const TransportInfo = ({ activeStep, toNext }: { activeStep?: THeadStepItem; toN
     mutate(data);
   };
 
+  if (isLoading) {
+    return <Skeleton className="w-full h-[65dvh] rounded-md" />;
+  }
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <Controller
@@ -188,7 +202,7 @@ const TransportInfo = ({ activeStep, toNext }: { activeStep?: THeadStepItem; toN
         }}
       />
 
-      <Button isLoading={isPending} size="lg" className="gap-3 w-full h-12">
+      <Button isLoading={isPending || pendingEnq} size="lg" className="gap-3 w-full h-12">
         Pickup Info
         <MoveRight strokeWidth={1.5} />
       </Button>

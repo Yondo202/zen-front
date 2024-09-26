@@ -78,9 +78,9 @@ const Footer = () => {
           <div className="space-y-2">
             <div className="font-medium mb-4">Social</div>
             <div className="flex gap-4">
-              <a href="https://www.facebook.com/montway" target="_blank" className="bg-slate-100/20 w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"><Facebook fill="#FFF" strokeWidth={0} /></a>
-              <a  href="https://www.instagram.com/montwayautotransport" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Instagram  /></a>
-              <a  href="https://www.linkedin.com/company/montway-auto-transport" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Linkedin  fill="#FFF" strokeWidth={0} /></a>
+              <a href="https://www.facebook.com" target="_blank" className="bg-slate-100/20 w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"><Facebook fill="#FFF" strokeWidth={0} /></a>
+              <a  href="https://www.instagram.com" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Instagram  /></a>
+              <a  href="https://www.linkedin.com/company" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Linkedin  fill="#FFF" strokeWidth={0} /></a>
             </div>
           </div>
         </div>
