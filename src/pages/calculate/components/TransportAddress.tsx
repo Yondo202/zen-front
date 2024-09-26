@@ -19,7 +19,7 @@ type TAddress = {
 
 type Ttype = "Open" | "Enclosed";
 
-export type TStepCompProps = { finalData: any; setActiveStep: (values?: any) => void, activeStep:TStepItem }
+export type TStepCompProps = { finalData: any; setActiveStep: (values?: any) => void; activeStep: TStepItem };
 
 const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompProps) => {
   const [errors, setErros] = useState({
@@ -32,13 +32,13 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
   const [transportValue, setTransportValue] = useState<{
     from?: TAddress;
     to?: TAddress;
-  }>({ from: undefined, to: undefined });
+  }>({ from: undefined, to: undefined })
 
   const [transType, setTransType] = useState<Ttype>("Open");
 
   useEffect(() => {
     if (finalData?.zipInfo?.source?.state) {
-      const final = finalData?.zipInfo
+      const final = finalData?.zipInfo;
       setTransportValue({
         from: {
           //source
@@ -60,7 +60,7 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
         },
       });
     }
-    setTransType(finalData?.transportType)
+    setTransType(finalData?.transportType);
   }, [activeStep, finalData?.zipInfo?.source?.state]);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
       return;
     }
     if (transportValue.to?.US_Zip_Code === transportValue.from?.US_Zip_Code) {
-      setErros((prev) => ({ ...prev, sameFromTo:true  }));
+      setErros((prev) => ({ ...prev, sameFromTo: true }));
       return;
     }
 
@@ -123,7 +123,7 @@ const TransportAddress = ({ finalData, setActiveStep, activeStep }: TStepCompPro
         <RadioGroup
           value={transType}
           onValueChange={(event: Ttype) => {
-            setTransType(event)
+            setTransType(event);
           }}
           // defaultValue="option-one"
           className="flex gap-2"
@@ -169,11 +169,11 @@ const FromToAddressInput = ({ transportValue, transportType, setTransportValue, 
     queryFn: () =>
       request<{ results: TAddress[] }>({
         mainUrl: "https://parseapi.back4app.com",
-        url: `/classes/US_Zip_Code${parseInt(searchFrom?.value) ? `?where={"US_Zip_Code":${searchFrom?.value}}` : ``}`,
+        url: `/classes/US_Zip_Code${!!Number(searchFrom?.value) ? `?where={"US_Zip_Code":${searchFrom?.value}}` : ``}`,
         method: "get",
         queryParams: {
           // where: { Primary_city: { $text: { $search: { $term: searchFrom?.value } } } },
-          where: parseInt(searchFrom?.value)
+          where: !!Number(searchFrom?.value)
             ? {}
             : {
                 Primary_city: {
@@ -198,7 +198,7 @@ const FromToAddressInput = ({ transportValue, transportType, setTransportValue, 
         <Input
           id="from"
           className={cn("h-11 border-none shadow-none rounded-none px-3 focus-visible:ring-blue-400 text-base", require ? `border-destructive border-dashed` : ``)}
-          placeholder={transportValue ? `${transportValue?.Primary_city}, ${transportValue?.State}` : `Zip or City`}
+          placeholder={transportValue ? `${transportValue?.Primary_city}, ${transportValue?.State} ${transportValue.US_Zip_Code}` : `Zip or City`}
           // onFocus={() =>
           //   setSearchFrom((prev) => ({ isActive: true, value: prev.value }))
           // }
@@ -210,7 +210,7 @@ const FromToAddressInput = ({ transportValue, transportType, setTransportValue, 
           //     }));
           //   }
           // }}
-          value={!searchFrom.isActive && transportValue ? `${transportValue?.Primary_city}, ${transportValue?.State}` : searchFrom?.value}
+          value={!searchFrom.isActive && transportValue ? `${transportValue?.Primary_city}, ${transportValue?.State} ${transportValue.US_Zip_Code}` : searchFrom?.value}
           onChange={(e) => setSearchFrom({ isActive: true, value: e.target.value })}
         />
         {transportValue?.US_Zip_Code && (

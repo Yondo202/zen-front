@@ -46,7 +46,7 @@ const InitialCalculate = ({ className }: TInitialCalculate) => {
       calculatedCost: 0,
       baseRate: 0.8,
     },
-  });
+  })
 
   const nextAction = (localType: string, setValues?: any, prevLocalType?: string) => {
     setSubSteps((prev) => {

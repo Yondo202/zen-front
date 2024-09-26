@@ -43,7 +43,7 @@ export const request = async <T>({
 }: TRequest<T>) => {
   const header = headers ? { headers: { ...(headers ?? {}) } } : {};
   const reqAsset = { params: queryParams, ...header }; // headers: { 'Access-Control-Allow-Origin' : '*', },
-  const fullUrl = `${mainUrl ?? import.meta.env.VITE_MAIN_URL}${url}`;
+  const fullUrl = `${mainUrl ?? import.meta.env.VITE_SERVER_URL}${url}`;
 
   try {
     // const response = await axios<ResponseType<T>>({ url: fullUrl, method: method, data: body ?? filterBody ?? {}, ...reqAsset }); // tur ashiglaj baigaa data naas shaltgalaad tur darsan

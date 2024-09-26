@@ -68,7 +68,6 @@ const AdressDetail = ({ toNext, addressId, addressType, orderId }: TAddressDetai
     queryFn: () =>
       request({
         mainUrl: `${import.meta.env.VITE_SERVER_URL}/orders/${orderId}`,
-        method: "get",
       }),
   });
 
