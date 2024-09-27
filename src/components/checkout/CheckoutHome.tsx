@@ -93,6 +93,7 @@ const CheckoutHome = () => {
 
   if (subSteps.find((item) => item.status === "process")?.localKey === "thank-you") {
     return <ThankYou orderId={data?.data?.attributes?.order?.data?.attributes?.payment_status === "paid" ? undefined : data?.data?.attributes?.order?.data?.id} />;
+    // return <ThankYou orderId={data?.data?.attributes?.order?.data?.id} />;
   }
 
   return (
