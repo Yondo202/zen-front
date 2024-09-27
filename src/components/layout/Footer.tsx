@@ -1,9 +1,9 @@
 import { ArrowUpRight, Quote, Star } from "lucide-react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
-const items = ["How It Works", "About Zen Logistics", "Services", "Cost calculator", "Terms and Conditions", "Privacy policy"];
+const items = ["How It Works", "About Zen Logistics", "Services", "Cost calculator"]; //"Terms and Conditions", "Privacy policy"
 
-const Footer = () => {
+const Footer = ({ data }: { data: any }) => {
   return (
     <>
       <div className="bg-primary main-x-p py-14 grid grid-cols-[42%_1fr] gap-5 text-primary-foreground h-[82dvh] max-sm:grid-cols-1 max-sm:h-auto">
@@ -11,7 +11,7 @@ const Footer = () => {
         <div
           className="bg-no-repeat bg-cover bg-top mr-36"
           style={{
-            backgroundImage: `url("https://s3-alpha-sig.figma.com/img/5df7/2ac6/9a60635e2f90e535cc3f89506a58cfcd?Expires=1726444800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XVDuYVA54pIf2vW~5Vy6AjbmCbIdE127qohx2cX7VdRAL5c7lpUWD3W4HW6bKCevdGMX7xtc5~sSNjNfu7Noeb4HqomKlDFKAsFqKYawzPG7ZI3Dw3yNrCjXRru-IsRMFvV6rtGxBHHNlwo7n2UbAvNkRnjBiyApnawTNMAR93tCu6OBj-SJI4xrXGKzoFowmWmjR1SjN8p57FUmM~9aooMEwShBwFCpTF6HPWvR8Wg2HtN-JC2Rs7muNZL1MjHpbP6ZWZiR2QNy4fzDp85i0sXA9W9qNmOIALZwOT42Qp8K32YbD2-qoPr2lTwnLi9TFQTpK~ox4nA7-DDvtApovw__")`,
+            backgroundImage: `url("${data?.FeedBack?.image?.data?.attributes?.url}")`,
           }}
         />
 
@@ -23,7 +23,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <div className="mb-3">Robart Clive</div>
+              <div className="mb-3">{data?.FeedBack?.customer_name}</div>
               <div className="text-primary-foreground/70">Satisfied Client</div>
             </div>
           </div>
@@ -34,11 +34,8 @@ const Footer = () => {
             <Star fill="#FFAA01" color="#FFAA01" size={18} />
             <Star fill="#FFAA01" color="#FFAA01" size={18} />
           </div>
-          <div className="text-xl font-medium mb-3">‟Highly Effective Transport Service”</div>
-          <div className="text-primary-foreground/65 leading-8 pr-10">
-            I recently used ZEN for transporting my car across the country, and I couldn't be happier with the service! From start to finish, the entire process was seamless and stress-free. The team was incredibly professional and handled every detail with care. I appreciated the regular updates
-            and the ability to track my car's journey in real-time. My vehicle arrived on time and in perfect condition. I highly recommend ZEN to anyone looking for a reliable and efficient car transport service. They've truly set the standard for excellence in this industry!
-          </div>
+          <div className="text-xl font-medium mb-3">{data?.FeedBack?.title}</div>
+          <div className="text-primary-foreground/65 leading-8 pr-10">{data?.FeedBack?.description}</div>
         </div>
       </div>
 
@@ -67,27 +64,31 @@ const Footer = () => {
             <div className="font-medium mb-4">Contact</div>
             <div className="text-primary-foreground/70 cursor-pointer hover:text-primary-foreground">
               <span className="text-primary-foreground">Email: </span>
-              ZenDemi@gmail.com
+              {data?.email}
             </div>
             <div className="text-primary-foreground/70 cursor-pointer hover:text-primary-foreground">
               {" "}
-              <span className="text-primary-foreground">Number: </span> +833-644-0386
+              <span className="text-primary-foreground">Number: </span> {data?.phone_number}
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="font-medium mb-4">Social</div>
             <div className="flex gap-4">
-              <a href="https://www.facebook.com" target="_blank" className="bg-slate-100/20 w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"><Facebook fill="#FFF" strokeWidth={0} /></a>
-              <a  href="https://www.instagram.com" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Instagram  /></a>
-              <a  href="https://www.linkedin.com/company" target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"><Linkedin  fill="#FFF" strokeWidth={0} /></a>
+              <a href={data?.facebook_link} target="_blank" className="bg-slate-100/20 w-9 h-9 flex items-center justify-center rounded-full cursor-pointer">
+                <Facebook fill="#FFF" strokeWidth={0} />
+              </a>
+              <a href={data?.insta_link} target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer">
+                <Instagram />
+              </a>
+              <a href={data?.linkden_link} target="_blank" className="bg-slate-100/20 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer">
+                <Linkedin fill="#FFF" strokeWidth={0} />
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="flex justify-center py-5 border-t border-px border-muted-foreground/40">
-          Copyright © 2024 <span className="text-[#ABC4FF]">Zen Logistics</span>. All rights reserved
-        </div>
+        <div className="flex justify-center py-5 border-t border-px border-muted-foreground/40">{data?.copyright}</div>
       </div>
     </>
   );
