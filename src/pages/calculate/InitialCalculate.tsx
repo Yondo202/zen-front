@@ -44,7 +44,8 @@ const InitialCalculate = ({ className }: TInitialCalculate) => {
     },
     cost: {
       calculatedCost: 0,
-      baseRate: 0.8,
+      // baseRate: 0.8,
+      baseRate: 0.41977,
     },
   })
 

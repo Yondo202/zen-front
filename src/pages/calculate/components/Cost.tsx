@@ -49,8 +49,6 @@ const Cost = ({ finalData }: TStepCompProps["finalData"]) => {
     }
   }, [isFetchedAfterMount]);
 
-  console.log(data, "----------->data");
-
   return (
     <>
       <div className="grid grid-cols-2 gap-3 text-sm">

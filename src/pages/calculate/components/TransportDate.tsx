@@ -3,8 +3,8 @@ import { useForm, Controller } from "react-hook-form";
 import { TStepCompProps } from "./TransportAddress";
 import { useEffect } from "react";
 import { Label, Button, Input, DatePicker } from "@/components/ui";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom"; 
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { request } from "@/lib/request";
 
 type TForm = {
@@ -16,7 +16,8 @@ type TForm = {
 // cancel_url: 'http://localhost:5173/services-checkout/11?canceled=true',
 
 const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { data: baseRateData, isFetchedAfterMount } = useQuery({ queryKey: ["base-rate"], queryFn: () => request<any>({ url: "/base-rate?populate=vehicle_types" }) });
   const { control, handleSubmit, reset } = useForm<TForm>({
     defaultValues: { email: "", phoneNumber: "", date: "" },
   });
@@ -29,7 +30,7 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
         mainUrl: `${import.meta.env.VITE_SERVER_URL}/enquiries`,
       }),
     onSuccess: (resdata) => {
-      navigate(`/services-checkout/${resdata?.id}`)
+      navigate(`/services-checkout/${resdata?.id}`);
     },
   });
 
@@ -43,19 +44,30 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
         mainUrl: `https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=${finalData?.zipInfo?.source?.latitude},${finalData?.zipInfo?.source.longitude}&destinations=${finalData?.zipInfo?.destination.latitude},${finalData?.zipInfo?.destination.longitude}`,
       }),
     onSuccess: (resdata) => {
-      let baseRate = 0.41977; // nemelteer olon zuilees hamaarna
+      let baseRate = 0.5; 
       // if (finalData.transportType === 'Open') baseRate = openRate
-      // if (finalData.transportType === 'Enclosed') baseRate = enclosedRate
+      const found = baseRateData?.data?.attributes?.vehicle_types?.find((item:any)=>item?.name === finalData?.vehicleInfo?.model?.type)
+
+      if(found){
+        baseRate = found.base_rate
+      }
+
       const { totalCost, mile } = calculateTransportCost(baseRate, resdata?.distances?.[0]?.[0]);
+
+      let finalCost = parseFloat(totalCost.toFixed(2)) 
+
+      if(finalData.transportType === "Enclosed"){
+        finalCost = finalCost + baseRateData?.data?.attributes?.enclosed
+      }
 
       finalMutate({
         ...finalData,
         cost: {
           mile: mile,
-          calculatedCost: Math.ceil(totalCost),
+          calculatedCost: finalCost,
           baseRate: baseRate,
         },
-      })
+      });
     },
   });
 
@@ -133,7 +145,7 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
         </div>
       </div>
 
-      <Button isLoading={isPending || finalPending} type="submit" className="w-full gap-3">
+      <Button disabled={!isFetchedAfterMount} isLoading={isPending || finalPending} type="submit" className="w-full gap-3">
         Calculate cost <MoveRight width={20} strokeWidth={1.5} />
       </Button>
     </form>
@@ -149,5 +161,5 @@ function calculateTransportCost(baseRate: number, distance: number) {
   // Calculate the total cost
   const totalCost = baseRate * distanceInMiles;
 
-  return { totalCost:totalCost, mile:distanceInMiles };
+  return { totalCost: totalCost, mile: distanceInMiles };
 }

@@ -5,14 +5,14 @@ import { useMutation } from "@tanstack/react-query";
 import { request } from "@/lib/request";
 import { useEffect } from "react";
 
-const ThankYou = ({ orderId }: { orderId?: string }) => {
+const ThankYou = ({ orderId, enqData }: { orderId?: string; enqData:any }) => {
   // const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: () =>
       request({
         mainUrl: `${import.meta.env.VITE_SERVER_URL}/orders/${orderId}`,
-        filterBody: { data: { payment_status: "paid", orderId:orderId } },
+        filterBody: { data: { payment_status: "paid", enqData:enqData } },
         method: "put",
         offAlert: true
       }),
