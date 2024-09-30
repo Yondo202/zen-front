@@ -44,27 +44,27 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
         mainUrl: `https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=${finalData?.zipInfo?.source?.latitude},${finalData?.zipInfo?.source.longitude}&destinations=${finalData?.zipInfo?.destination.latitude},${finalData?.zipInfo?.destination.longitude}`,
       }),
     onSuccess: (resdata) => {
-      let baseRate = 0.5; 
+      let baseRate = 0.5;
       // if (finalData.transportType === 'Open') baseRate = openRate
-      const found = baseRateData?.data?.attributes?.vehicle_types?.find((item:any)=>item?.name === finalData?.vehicleInfo?.model?.type)
+      const found = baseRateData?.data?.attributes?.vehicle_types?.find((item: any) => item?.name === finalData?.vehicleInfo?.model?.type);
 
-      if(found){
-        baseRate = found.base_rate
+      if (found) {
+        baseRate = found.base_rate;
       }
 
       const { totalCost, mile } = calculateTransportCost(baseRate, resdata?.distances?.[0]?.[0]);
 
-      let finalCost = parseFloat(totalCost.toFixed(2)) 
+      let finalCost:number = totalCost;
 
-      if(finalData.transportType === "Enclosed"){
-        finalCost = finalCost + baseRateData?.data?.attributes?.enclosed
+      if (finalData.transportType === "Enclosed") {
+        finalCost = finalCost + baseRateData?.data?.attributes?.enclosed;
       }
 
       finalMutate({
         ...finalData,
         cost: {
           mile: mile,
-          calculatedCost: finalCost,
+          calculatedCost: finalCost?.toFixed(2),
           baseRate: baseRate,
         },
       });
