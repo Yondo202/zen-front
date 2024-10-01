@@ -52,7 +52,7 @@ const TransportDate = ({ setActiveStep, finalData, activeStep }: TStepCompProps)
         baseRate = found.base_rate;
       }
 
-      const { totalCost, mile } = calculateTransportCost(baseRate, resdata?.distances?.[0]?.[0]);
+      const { totalCost, mile } = calculateTransportCost(baseRate, resdata?.distances?.[0]?.[0])
 
       let finalCost:number = totalCost;
 
